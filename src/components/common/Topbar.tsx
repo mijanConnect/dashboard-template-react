@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Bell, Menu } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ProfilePopover from "./ProfilePopover";
 
 function formatPageTitle(pathname: string) {
@@ -19,6 +19,7 @@ interface TopbarProps {
 
 export default function Topbar({ onMenuClick }: TopbarProps) {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -43,6 +44,7 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
             variant="ghost"
             size="icon"
             className="text-black"
+            onClick={() => navigate("/message")}
             aria-label="Open chat"
           >
             <MessageCircle className="size-5" />
