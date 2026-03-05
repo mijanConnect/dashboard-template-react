@@ -16,6 +16,8 @@ import PrivacyPolicy from "@/components/pages/privacyPolicy/PrivacyPolicy";
 import AboutUs from "@/components/pages/aboutUs/AboutUs";
 import Settings from "@/components/pages/settings/Settings";
 import Message from "@/components/pages/message/Message";
+import Notifications from "@/components/pages/notifications/Notifications";
+import Profile from "@/components/pages/profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +89,14 @@ const router = createBrowserRouter([
       {
         path: "message",
         element: <Message />,
+      },
+      {
+        path: "notifications",
+        element: <Notifications />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },

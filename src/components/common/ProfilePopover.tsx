@@ -4,8 +4,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePopover() {
+  const navigate = useNavigate();
   return (
     <>
       {/* Desktop version - profile name and image */}
@@ -17,9 +19,12 @@ export default function ProfilePopover() {
               alt="User profile"
               className="size-9 rounded-full object-cover"
             />
-            <span className="text-sm font-medium text-foreground">
-              Isidro Rebelo
-            </span>
+            <div className="flex flex-col leading-none">
+              <span className="text-sm font-medium text-foreground">
+                Isidro Rebelo
+              </span>
+              <span className="text-xs text-muted-foreground">Admin</span>
+            </div>
           </div>
         </PopoverTrigger>
         <PopoverContent className="w-56 p-0" align="end">
@@ -34,11 +39,17 @@ export default function ProfilePopover() {
             </span>
           </div>
           <div className="space-y-2 p-4">
-            <button className="flex w-full items-center gap-3 rounded-md px-4 py-2 hover:bg-accent cursor-pointer">
+            <button
+              onClick={() => navigate("/profile")}
+              className="flex w-full items-center gap-3 rounded-md px-4 py-2 hover:bg-accent cursor-pointer"
+            >
               <User className="size-5" />
               <span>View Profile</span>
             </button>
-            <button className="flex w-full items-center gap-3 rounded-md px-4 py-2 hover:bg-destructive hover:text-white cursor-pointer">
+            <button
+              onClick={() => navigate("/auth/login")}
+              className="flex w-full items-center gap-3 rounded-md px-4 py-2 hover:bg-destructive hover:text-white cursor-pointer"
+            >
               <LogOut className="size-5" />
               <span>Logout</span>
             </button>

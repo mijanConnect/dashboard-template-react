@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Bell, Menu } from "lucide-react";
+import { Bell, Menu, MessageCircleMore } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import ProfilePopover from "./ProfilePopover";
 
 function formatPageTitle(pathname: string) {
@@ -20,6 +21,8 @@ interface TopbarProps {
 export default function Topbar({ onMenuClick }: TopbarProps) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const [unreadNotifications] = useState(3);
+  const [unreadMessages] = useState(2);
 
   return (
     <>
@@ -39,25 +42,40 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
           </h1>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-black"
-            onClick={() => navigate("/message")}
-            aria-label="Open chat"
-          >
-            <MessageCircle className="size-5" />
-          </Button>
+        <div className="flex items-center gap-2 sm:gap-2">
+          <div className="relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-black cursor-pointer"
+              onClick={() => navigate("/message")}
+              aria-label="Open chat"
+            >
+              <MessageCircleMore className="size-6" />
+            </Button>
+            {unreadMessages > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full h-5 min-w-5 px-1.5 flex items-center justify-center">
+                {unreadMessages > 99 ? "99+" : unreadMessages}
+              </span>
+            )}
+          </div>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-black"
-            aria-label="View notifications"
-          >
-            <Bell className="size-5" />
-          </Button>
+          <div className="relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-black cursor-pointer"
+              onClick={() => navigate("/notifications")}
+              aria-label="View notifications"
+            >
+              <Bell className="size-6" />
+            </Button>
+            {unreadNotifications > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full h-5 min-w-5 px-1.5 flex items-center justify-center">
+                {unreadNotifications > 99 ? "99+" : unreadNotifications}
+              </span>
+            )}
+          </div>
 
           <ProfilePopover />
         </div>

@@ -15,7 +15,6 @@ import {
   FileCheck,
   Shield,
   Info,
-  Settings,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -46,7 +45,7 @@ const featureRoutes = [
   },
   { label: "Privacy Policy", path: "/privacy-policy", icon: Shield },
   { label: "About Us", path: "/about-us", icon: Info },
-  { label: "Settings", path: "/settings", icon: Settings },
+  // { label: "Settings", path: "/settings", icon: Settings },
 ];
 
 interface SidebarProps {
