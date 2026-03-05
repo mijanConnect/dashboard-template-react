@@ -14,7 +14,7 @@ type ContentData = {
   image: string; // URL
   description: string;
   date: string; // YYYY-MM-DD
-  status: "Published" | "Draft" | "Archived";
+  status: "Active" | "Inactive";
   actions?: TableAction<ContentData>[];
 };
 
@@ -27,7 +27,7 @@ const sampleData: ContentData[] = [
     image: "https://picsum.photos/80/60?random=1",
     description: "Tips to maintain a balanced diet and stay healthy.",
     date: "2026-03-01",
-    status: "Published",
+    status: "Active",
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ const sampleData: ContentData[] = [
     image: "https://picsum.photos/80/60?random=2",
     description: "Start your day with these effective exercises.",
     date: "2026-03-02",
-    status: "Draft",
+    status: "Inactive",
   },
   {
     id: 3,
@@ -47,7 +47,7 @@ const sampleData: ContentData[] = [
     image: "https://picsum.photos/80/60?random=3",
     description: "Techniques to reduce stress and improve mental health.",
     date: "2026-03-03",
-    status: "Published",
+    status: "Active",
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ const sampleData: ContentData[] = [
     image: "https://picsum.photos/80/60?random=4",
     description: "Improve heart health with these lifestyle changes.",
     date: "2026-03-04",
-    status: "Archived",
+    status: "Inactive",
   },
   {
     id: 5,
@@ -67,7 +67,7 @@ const sampleData: ContentData[] = [
     image: "https://picsum.photos/80/60?random=5",
     description: "Relax your mind and body with this yoga routine.",
     date: "2026-03-05",
-    status: "Published",
+    status: "Active",
   },
   {
     id: 6,
@@ -77,7 +77,7 @@ const sampleData: ContentData[] = [
     image: "https://picsum.photos/80/60?random=6",
     description: "Learn how to eat mindfully for better digestion.",
     date: "2026-03-06",
-    status: "Draft",
+    status: "Inactive",
   },
 ];
 
@@ -94,24 +94,39 @@ export default function ContentTable() {
         item.id === id
           ? {
               ...item,
-              status: checked ? "Published" : "Draft",
+              status: checked ? "Active" : "Inactive",
             }
           : item,
       ),
     );
   };
 
+  const actions: TableAction<ContentData>[] = [
+    {
+      label: "Edit",
+      onClick: (item) => console.log("Edit:", item),
+      variant: "outline",
+      size: "sm",
+    },
+    {
+      label: "Delete",
+      onClick: (item) => console.log("Delete:", item),
+      variant: "destructive",
+      size: "sm",
+    },
+  ];
+
   const columns: Column<ContentData>[] = [
-    { key: "serial", label: "S.N", width: "6%" },
+    { key: "serial", label: "S.N", width: "5%" },
 
-    { key: "title", label: "Content Title", width: "18%" },
+    { key: "title", label: "Content Title", width: "25%" },
 
-    { key: "category", label: "Category", width: "12%" },
+    { key: "category", label: "Category", width: "10%" },
 
     {
       key: "image",
       label: "Image",
-      width: "12%",
+      width: "10%",
       render: (value) => (
         <img
           src={value as string}
@@ -121,36 +136,18 @@ export default function ContentTable() {
       ),
     },
 
-    { key: "description", label: "Description", width: "20%" },
+    { key: "description", label: "Description", width: "25%" },
 
-    { key: "date", label: "Date", width: "12%" },
+    { key: "date", label: "Date", width: "15%" },
 
     {
       key: "status",
       label: "Status",
-      width: "10%",
-      render: (value) => (
-        <span
-          className={`inline-flex px-2 py-1 rounded-full text-xs font-semibold ${
-            value === "Published"
-              ? "bg-green-100 text-green-800 border border-green-300"
-              : value === "Draft"
-                ? "bg-yellow-100 text-yellow-800 border border-yellow-300"
-                : "bg-red-100 text-red-800 border border-red-300"
-          }`}
-        >
-          {value as string}
-        </span>
-      ),
-    },
-    {
-      key: "actions",
-      label: "Actions",
-      width: "0%",
+      width: "20%",
       render: (_, item) => (
-        <div className="flex gap-2 items-center justify-center">
+        <div className="flex gap-2 items-center">
           <Switch
-            checked={item.status === "Published"}
+            checked={item.status === "Active"}
             onCheckedChange={(checked) => handleStatusToggle(item.id, checked)}
           />
         </div>
@@ -163,6 +160,7 @@ export default function ContentTable() {
       columns={columns}
       data={data}
       itemsPerPage={10}
+      actions={actions}
       rowKey="id"
       onRowClick={handleRowClick}
     />

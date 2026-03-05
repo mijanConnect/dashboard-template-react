@@ -258,6 +258,25 @@ export const authApi = baseApi.injectEndpoints({
       transformResponse: (response) => response?.data ?? response,
       providesTags: ["Profile"],
     }),
+
+    getAboutUs: builder.query({
+      query: () => ({
+        url: "/disclaimers/about-us",
+        method: "GET",
+      }),
+      transformResponse: (response) => response?.data ?? response,
+      providesTags: ["Profile"],
+    }),
+
+    updateAboutUs: builder.mutation({
+      query: (data) => ({
+        url: "/disclaimers/about-us",
+        method: "PUT",
+        body: data,
+      }),
+      transformResponse: (response) => response?.data ?? response,
+      invalidatesTags: ["Profile"],
+    }),
   }),
 });
 
@@ -279,4 +298,6 @@ export const {
   useUpdateConsentsMutation,
   useGetConsentsQuery,
   useGetCookiePolicyQuery,
+  useGetAboutUsQuery,
+  useUpdateAboutUsMutation,
 } = authApi;
