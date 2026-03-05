@@ -10,14 +10,14 @@ import {
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
 import { useState } from "react";
-import TransactionsTable from "./TransactionsTable";
+import AppointmentsTable from "./AppointmentTable";
 
 interface SearchBarProps {
   onSearch?: (value: string) => void;
   onFilterChange?: (value: string) => void;
 }
 
-export default function Transactions({
+export default function AppointmentManagement({
   onSearch,
   onFilterChange,
 }: SearchBarProps) {
@@ -65,7 +65,7 @@ export default function Transactions({
       </div>
 
       {/* Table */}
-      <TransactionsTable />
+      <AppointmentsTable />
     </div>
   );
 }

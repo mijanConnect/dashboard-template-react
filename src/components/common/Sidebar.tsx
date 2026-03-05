@@ -29,8 +29,8 @@ const featureRoutes = [
   { label: "Patient Management", path: "/patient-management", icon: Users },
   { label: "Transactions", path: "/transactions", icon: CreditCard },
   {
-    label: "Business Setting",
-    path: "/business-setting",
+    label: "Business Settings",
+    path: "/business-settings",
     icon: Briefcase,
   },
   { label: "Schedule", path: "/schedule", icon: Clock },

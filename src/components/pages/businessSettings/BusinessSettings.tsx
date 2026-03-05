@@ -3,36 +3,20 @@
 import { Input } from "@/components/ui/input";
 import { Plus, Search } from "lucide-react";
 import { useState } from "react";
+import BusinessTable from "./BusinessTable";
 import CustomButton from "@/components/common/CustomButton";
-import ContentTable from "./ContentTable";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 interface SearchBarProps {
   onSearch?: (value: string) => void;
   onFilterChange?: (value: string) => void;
 }
 
-export default function ContentManagement({
-  onSearch,
-  onFilterChange,
-}: SearchBarProps) {
+export default function BusinessSettings({ onSearch }: SearchBarProps) {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState("all");
 
   const handleSearchChange = (value: string) => {
     setQuery(value);
     onSearch?.(value);
-  };
-
-  const handleFilterChange = (value: string) => {
-    setFilter(value);
-    onFilterChange?.(value);
   };
 
   return (
@@ -53,25 +37,12 @@ export default function ContentManagement({
         {/* Create Button */}
         <CustomButton variant="default" size="default">
           <Plus className="h-5 w-5 white" />
-          Add Content
+          Create Package
         </CustomButton>
-
-        {/* Select Dropdown */}
-        <Select value={filter} onValueChange={handleFilterChange}>
-          <SelectTrigger className="w-full sm:w-35 rounded-full h-12.5 bg-primary text-white text-[16px]">
-            <SelectValue placeholder="Filter by" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All</SelectItem>
-            <SelectItem value="male">Published</SelectItem>
-            <SelectItem value="female">Draft</SelectItem>
-            <SelectItem value="high">Archive</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
 
       {/* Table */}
-      <ContentTable />
+      <BusinessTable />
     </div>
   );
 }

@@ -172,7 +172,7 @@ export default function DataTable<T>({
                 setCurrentPage(1);
               }}
             >
-              <SelectTrigger className="w-20">
+              <SelectTrigger className="w-17 h-8">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

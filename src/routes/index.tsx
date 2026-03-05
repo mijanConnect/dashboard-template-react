@@ -5,10 +5,10 @@ import Login from "@/components/auth/Login";
 import ForgotPassword from "@/components/auth/ForgotPassword";
 import Overview from "@/components/pages/overview/Overview";
 import NotFound from "@/components/NotFound";
-import AppointmentsManagement from "@/components/pages/appointmentsManagement/AppointmentsManagement";
+import AppointmentsManagement from "@/components/pages/appointmentsManagement/AppointmentManagement";
 import PatientManagement from "@/components/pages/patientManagement/PatientManagement";
 import Transactions from "@/components/pages/transactions/Transactions";
-import BusinessSettings from "@/components/pages/businessSetting/BusinessSettings";
+import BusinessSettings from "@/components/pages/businessSettings/BusinessSettings";
 import Schedule from "@/components/pages/schedule/Schedule";
 import ContentManagement from "@/components/pages/contentManagement/ContentManagement";
 import TermsConditions from "@/components/pages/termsConditions/TermsConditions";
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
         element: <Transactions />,
       },
       {
-        path: "business-setting",
+        path: "business-settings",
         element: <BusinessSettings />,
       },
       {
