@@ -1,4 +1,7 @@
 import { Button } from "@/components/ui/button";
+import PersonalInfo from "./PersonalInfo";
+import AcademicInfo from "./AcademicInfo";
+import Attachments from "./Attachments";
 
 export default function Profile() {
   return (
@@ -26,6 +29,15 @@ export default function Profile() {
               Change Password
             </Button>
           </div>
+        </div>
+        <PersonalInfo />
+        <AcademicInfo />
+        <Attachments />
+
+        <div className="flex justify-center">
+          <Button variant="default" className="w-80 mt-12 mb-8 ">
+            Save Changes
+          </Button>
         </div>
       </div>
     </>
