@@ -296,7 +296,8 @@ export default function PatientTable() {
         isOpen={isModalOpen}
         onClose={closeModal}
         title="Patient Details"
-        maxWidth="max-w-3xl"
+        maxWidth="max-w-[1200px]"
+        width="w-[60%]"
       >
         {selectedAppointment && <ViewPatient patient={selectedAppointment} />}
       </Modal>

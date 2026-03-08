@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Calendar,
@@ -54,6 +54,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const navigate = useNavigate();
   return (
     <>
       {isOpen && (
@@ -144,6 +145,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               "w-full cursor-pointer py-5 px-4 bg-accent text-black hover:bg-red-500 hover:text-white justify-start rounded-lg",
               !isOpen && "aspect-square w-10 md:w-full",
             )}
+            onClick={() => navigate("/auth/login")}
           >
             <LogOut className={cn("size-5", !isOpen ? "md:mr-2" : "mr-2")} />
             <span className={cn(!isOpen && "hidden md:inline")}>Logout</span>

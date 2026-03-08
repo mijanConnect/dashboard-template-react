@@ -28,7 +28,7 @@ export default function Login() {
     setTimeout(() => {
       setIsLoading(false);
       // Navigate to dashboard after successful login
-      navigate("/dashboard/overview");
+      navigate("/");
     }, 1000);
   };
 

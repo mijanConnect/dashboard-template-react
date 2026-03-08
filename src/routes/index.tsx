@@ -3,6 +3,10 @@ import MainLayout from "@/layout/main/MainLayout";
 import AuthLayout from "@/layout/auth/AuthLayout";
 import Login from "@/components/auth/Login";
 import ForgotPassword from "@/components/auth/ForgotPassword";
+import Register from "@/components/auth/Register";
+import VerifyOTP from "@/components/auth/VerifyOTP";
+import ResetPassword from "@/components/auth/ResetPassword";
+import SetPassword from "@/components/auth/SetPassword";
 import Overview from "@/components/pages/overview/Overview";
 import NotFound from "@/components/NotFound";
 import AppointmentsManagement from "@/components/pages/appointmentsManagement/AppointmentManagement";
@@ -29,8 +33,24 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: "signup",
+        element: <Register />,
+      },
+      {
         path: "forgot-password",
         element: <ForgotPassword />,
+      },
+      {
+        path: "verify-otp",
+        element: <VerifyOTP />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
+      },
+      {
+        path: "set-password",
+        element: <SetPassword />,
       },
     ],
   },

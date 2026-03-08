@@ -11,9 +11,9 @@ export default function AuthLayout({
   description = "Your journey to better health starts here. Track your appointments, monitor your progress, and achieve your wellness goals.",
 }: AuthLayoutProps) {
   return (
-    <div className="min-h-screen w-full flex">
+    <div className="min-h-screen w-full flex bg-gray-50">
       {/* Left Side - Auth Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 bg-background">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12">
         <div className="w-full max-w-md">
           <Outlet />
         </div>
