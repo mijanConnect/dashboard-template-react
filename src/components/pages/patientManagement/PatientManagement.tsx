@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
 import { useState } from "react";
-import PatientTable from "./PatientTable";
+import PatientTable from "./components/PatientTable";
 
 interface SearchBarProps {
   onSearch?: (value: string) => void;

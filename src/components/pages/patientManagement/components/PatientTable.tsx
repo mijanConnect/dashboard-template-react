@@ -1,5 +1,8 @@
 import type { Column, TableAction } from "@/components/common/DataTable";
 import DataTable from "@/components/common/DataTable";
+import Modal from "@/components/common/Modal";
+import { useState } from "react";
+import ViewPatient from "./ViewPatient";
 
 type PatientsData = {
   id: number;
@@ -97,21 +100,6 @@ const columns: Column<PatientsData>[] = [
         {String(value)}/100
       </span>
     ),
-  },
-];
-
-const actions: TableAction<PatientsData>[] = [
-  {
-    label: "Edit",
-    onClick: (item) => console.log("Edit:", item),
-    variant: "outline",
-    size: "sm",
-  },
-  {
-    label: "Delete",
-    onClick: (item) => console.log("Delete:", item),
-    variant: "destructive",
-    size: "sm",
   },
 ];
 
@@ -266,14 +254,52 @@ const handleRowClick = (item: PatientsData) => {
 };
 
 export default function PatientTable() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAppointment, setSelectedAppointment] =
+    useState<PatientsData | null>(null);
+
+  const openModal = (item: PatientsData) => {
+    setSelectedAppointment(item);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedAppointment(null);
+  };
+
+  const actions: TableAction<PatientsData>[] = [
+    {
+      label: "View",
+      onClick: (item) => openModal(item),
+      variant: "outline",
+      size: "sm",
+    },
+    {
+      label: "Delete",
+      onClick: (item) => console.log("Delete:", item),
+      variant: "destructive",
+      size: "sm",
+    },
+  ];
   return (
-    <DataTable<PatientsData>
-      columns={columns}
-      data={sampleData}
-      itemsPerPage={10}
-      actions={actions}
-      rowKey="id"
-      onRowClick={handleRowClick}
-    />
+    <>
+      <DataTable<PatientsData>
+        columns={columns}
+        data={sampleData}
+        itemsPerPage={10}
+        actions={actions}
+        rowKey="id"
+        onRowClick={handleRowClick}
+      />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Patient Details"
+        maxWidth="max-w-3xl"
+      >
+        {selectedAppointment && <ViewPatient patient={selectedAppointment} />}
+      </Modal>
+    </>
   );
 }

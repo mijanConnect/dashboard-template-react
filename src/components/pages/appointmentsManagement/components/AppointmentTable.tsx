@@ -1,11 +1,15 @@
+import { useState } from "react";
 import type { Column, TableAction } from "@/components/common/DataTable";
 import DataTable from "@/components/common/DataTable";
+import Modal from "@/components/common/Modal";
+import ViewAppointment from "./ViewAppointment";
 
 type AppointmentData = {
   id: number;
   name: string;
   gender: "Male" | "Female";
   age: number;
+  email: string;
   problem: string;
   bookingDate: string;
   bookingTime: string;
@@ -50,27 +54,13 @@ const columns: Column<AppointmentData>[] = [
   },
 ];
 
-const actions: TableAction<AppointmentData>[] = [
-  {
-    label: "Edit",
-    onClick: (item) => console.log("Edit:", item),
-    variant: "outline",
-    size: "sm",
-  },
-  {
-    label: "Delete",
-    onClick: (item) => console.log("Delete:", item),
-    variant: "destructive",
-    size: "sm",
-  },
-];
-
 const sampleData: AppointmentData[] = [
   {
     id: 1,
     name: "John Doe",
     gender: "Male",
     age: 34,
+    email: "johndoe@example.com",
     problem: "Back Pain",
     bookingDate: "2026-03-01",
     bookingTime: "10:30 AM",
@@ -82,6 +72,7 @@ const sampleData: AppointmentData[] = [
     name: "Jane Smith",
     gender: "Female",
     age: 29,
+    email: "janesmith@example.com",
     problem: "Weight Gain",
     bookingDate: "2026-03-02",
     bookingTime: "12:00 PM",
@@ -93,6 +84,7 @@ const sampleData: AppointmentData[] = [
     name: "Michael Johnson",
     gender: "Male",
     age: 41,
+    email: "michaeljohnson@example.com",
     problem: "High Blood Pressure",
     bookingDate: "2026-03-03",
     bookingTime: "03:15 PM",
@@ -104,6 +96,7 @@ const sampleData: AppointmentData[] = [
     name: "Emily Brown",
     gender: "Female",
     age: 36,
+    email: "emilybrown@example.com",
     problem: "Diabetes",
     bookingDate: "2026-03-04",
     bookingTime: "09:45 AM",
@@ -115,6 +108,7 @@ const sampleData: AppointmentData[] = [
     name: "David Wilson",
     gender: "Male",
     age: 50,
+    email: "davidwilson@example.com",
     problem: "Heart Issue",
     bookingDate: "2026-03-05",
     bookingTime: "11:20 AM",
@@ -126,6 +120,7 @@ const sampleData: AppointmentData[] = [
     name: "Sophia Taylor",
     gender: "Female",
     age: 27,
+    email: "emilybrown@example.com",
     problem: "Migraine",
     bookingDate: "2026-03-06",
     bookingTime: "02:10 PM",
@@ -137,6 +132,7 @@ const sampleData: AppointmentData[] = [
     name: "James Anderson",
     gender: "Male",
     age: 45,
+    email: "emilybrown@example.com",
     problem: "Knee Pain",
     bookingDate: "2026-03-07",
     bookingTime: "04:00 PM",
@@ -148,6 +144,7 @@ const sampleData: AppointmentData[] = [
     name: "Olivia Thomas",
     gender: "Female",
     age: 32,
+    email: "emilybrown@example.com",
     problem: "Thyroid",
     bookingDate: "2026-03-08",
     bookingTime: "01:30 PM",
@@ -159,6 +156,7 @@ const sampleData: AppointmentData[] = [
     name: "William Martin",
     gender: "Male",
     age: 39,
+    email: "emilybrown@example.com",
     problem: "Obesity",
     bookingDate: "2026-03-09",
     bookingTime: "10:00 AM",
@@ -170,6 +168,7 @@ const sampleData: AppointmentData[] = [
     name: "Ava White",
     gender: "Female",
     age: 30,
+    email: "emilybrown@example.com",
     problem: "Stress",
     bookingDate: "2026-03-10",
     bookingTime: "05:00 PM",
@@ -181,6 +180,7 @@ const sampleData: AppointmentData[] = [
     name: "Daniel Harris",
     gender: "Male",
     age: 48,
+    email: "emilybrown@example.com",
     problem: "Cholesterol",
     bookingDate: "2026-03-11",
     bookingTime: "09:00 AM",
@@ -192,6 +192,7 @@ const sampleData: AppointmentData[] = [
     name: "Isabella Clark",
     gender: "Female",
     age: 26,
+    email: "emilybrown@example.com",
     problem: "Anemia",
     bookingDate: "2026-03-12",
     bookingTime: "03:30 PM",
@@ -205,14 +206,57 @@ const handleRowClick = (item: AppointmentData) => {
 };
 
 export default function AppointmentsTable() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAppointment, setSelectedAppointment] =
+    useState<AppointmentData | null>(null);
+
+  const openModal = (item: AppointmentData) => {
+    setSelectedAppointment(item);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedAppointment(null);
+  };
+
+  const actions: TableAction<AppointmentData>[] = [
+    {
+      label: "View",
+      onClick: (item) => openModal(item),
+      variant: "outline",
+      size: "sm",
+    },
+    {
+      label: "Delete",
+      onClick: (item) => console.log("Delete:", item),
+      variant: "destructive",
+      size: "sm",
+    },
+  ];
+
   return (
-    <DataTable<AppointmentData>
-      columns={columns}
-      data={sampleData}
-      itemsPerPage={10}
-      actions={actions}
-      rowKey="id"
-      onRowClick={handleRowClick}
-    />
+    <>
+      <DataTable<AppointmentData>
+        columns={columns}
+        data={sampleData}
+        itemsPerPage={10}
+        actions={actions}
+        rowKey="id"
+        onRowClick={handleRowClick}
+      />
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title="Appointment Details"
+        maxWidth="max-w-[1200px]"
+        width="w-[60%]"
+      >
+        {selectedAppointment && (
+          <ViewAppointment appointment={selectedAppointment} />
+        )}
+      </Modal>
+    </>
   );
 }
