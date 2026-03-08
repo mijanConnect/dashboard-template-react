@@ -72,8 +72,8 @@ export default function Overview() {
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-2xl font-semibold">Patients Update</h3>
               <div className="bg-gray-200 inline-block p-1 rounded-md">
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="size-6" stroke="black" />
+                <a href="/patient-management" rel="noopener noreferrer">
+                  <ExternalLink className="size-6 hover:stroke-blue-500" stroke="#9c9c9c" />
                 </a>
               </div>
             </div>
@@ -86,8 +86,8 @@ export default function Overview() {
           <div className="flex justify-between items-center mb-2">
             <h3 className="text-2xl font-semibold">Today’s Appointment (10)</h3>
             <div className="bg-gray-200 inline-block p-1 rounded-md">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="size-6" stroke="black" />
+              <a href="/appointments-management" rel="noopener noreferrer">
+                <ExternalLink className="size-6 hover:stroke-blue-500" stroke="#9c9c9c" />
               </a>
             </div>
           </div>

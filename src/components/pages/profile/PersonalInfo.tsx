@@ -105,7 +105,7 @@ export default function PersonalInfo({ onFilterChange }: FilterProps) {
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
-                  className="w-full justify-start text-left font-normal rounded-xl bg-[#F7F9FC] hover:bg-[#F7F9FC] focus:ring-[#F7F9FC] h-12.5 text-[16px]"
+                  className="w-full justify-start text-left font-normal rounded-xl border-gray-200 text-gray-500 hover:text-gray-500 bg-[#F7F9FC] hover:bg-[#F7F9FC] focus:ring-[#F7F9FC] h-12.5 text-[16px]"
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
 
