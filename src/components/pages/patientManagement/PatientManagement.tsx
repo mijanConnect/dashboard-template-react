@@ -1,16 +1,18 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Search } from "lucide-react";
 import { useState } from "react";
 import PatientTable from "./components/PatientTable";
+import CustomSelect from "@/components/common/CustomSelect";
+
+const filterOptions = [
+  { value: "all", label: "All" },
+  { value: "male", label: "Male" },
+  { value: "female", label: "Female" },
+  { value: "high", label: "High Fitness" },
+  { value: "low", label: "Low Fitness" },
+];
 
 interface SearchBarProps {
   onSearch?: (value: string) => void;
@@ -50,18 +52,13 @@ export default function PatientManagement({
         </div>
 
         {/* Select Dropdown */}
-        <Select value={filter} onValueChange={handleFilterChange}>
-          <SelectTrigger className="w-full sm:w-45 rounded-full h-12.5 bg-primary text-white text-[16px]">
-            <SelectValue placeholder="Filter by" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All</SelectItem>
-            <SelectItem value="male">Male</SelectItem>
-            <SelectItem value="female">Female</SelectItem>
-            <SelectItem value="high">High Fitness</SelectItem>
-            <SelectItem value="low">Low Fitness</SelectItem>
-          </SelectContent>
-        </Select>
+        <CustomSelect
+          options={filterOptions}
+          value={filter}
+          onValueChange={handleFilterChange}
+          placeholder="Filter by"
+          className="rounded-full max-w-37 px-5 h-12.5 text-[16px] bg-primary text-white"
+        />
       </div>
 
       {/* Table */}
