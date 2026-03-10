@@ -13,7 +13,7 @@ export default function CustomButton({
   children,
   variant = "default",
   size = "default",
-  className = "cursor-pointer px-4! hover:bg-gray-200 hover:text-black",
+  className = "cursor-pointer px-8! hover:bg-gray-200 hover:text-black",
   ...props
 }: CustomButtonProps) {
   return (
